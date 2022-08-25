@@ -20,3 +20,5 @@ C:\Users\Reliance Digital\Desktop\Project-1\ProjectClinic\src\ClinicManagement\C
 C:\Users\Reliance Digital\Desktop\Project-1\ProjectClinic\src\ClinicManagement\ClinicManagement\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\Reliance Digital\Desktop\Project-1\ProjectClinic\src\ClinicManagement\ClinicManagement\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\Reliance Digital\Desktop\Project-1\ProjectClinic\src\ClinicManagement\ClinicManagement\obj\Debug\net6.0\ClinicManagement.csproj.CopyComplete
+C:\Users\Reliance Digital\Desktop\Project-1\ProjectClinic\src\ClinicManagement\ClinicManagement\bin\Debug\net6.0\DataFetcher.dll
+C:\Users\Reliance Digital\Desktop\Project-1\ProjectClinic\src\ClinicManagement\ClinicManagement\bin\Debug\net6.0\DataFetcher.pdb
