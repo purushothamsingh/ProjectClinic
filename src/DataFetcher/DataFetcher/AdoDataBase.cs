@@ -41,6 +41,15 @@ namespace DataFetcher
         }
 
 
+        public  SqlDataReader ViewDoctorsData()
+        {
+            connect = GetConnection();
+            string query = "select * from DoctorDetails";
+            cmd = new SqlCommand(query, connect);
+            SqlDataReader dr = cmd.ExecuteReader();
+            return dr;
+        }
+
 
     }
 
