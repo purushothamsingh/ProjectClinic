@@ -10,6 +10,7 @@ namespace ClinicManagement
         public static SqlDataReader dr2;
         public static Login login;
         public static ViewDoctors viewDoctors = new ViewDoctors();
+        public static AddPatient addPatient = new AddPatient();
         public static void Main()
         {
             
@@ -40,6 +41,33 @@ namespace ClinicManagement
                     Console.WriteLine(dr2[0] + " "+ dr2[1] +" "+ dr2[2]+" " +dr2[3] + " " + dr2[4] + " " + dr2[5]+" " + dr2[6]);
                 }
             }
+            static void AddPatientDetails()
+            {
+                Console.WriteLine("Please add patient details below  ");
+                Console.WriteLine();
+                Console.Write("Enter FirstName ");
+                string fname = Console.ReadLine();
+                Console.Write("Enter LastName  ");
+                string lname = Console.ReadLine();
+                Console.Write("Enter Gender  ");
+                string gender = Console.ReadLine();
+                Console.WriteLine("Enter DateofBirth in DD/MM/YYY Format");
+                DateTime dt = Convert.ToDateTime(Console.ReadLine());
+
+                addPatient = new AddPatient(fname, lname, gender, dt);
+               int data = addPatient.Insertdata();
+                if (data > 0)
+                {
+                    Console.WriteLine("Patient details added succesfully");
+                }
+                else
+                {
+                    Console.WriteLine("Error in database");
+                }
+                
+
+            }
+
             bool status = true;
             bool is_sucessful = false;
 
@@ -64,7 +92,6 @@ namespace ClinicManagement
                 while (is_sucessful)
                 {
                     bool on_input = false;
-                    Console.WriteLine();
                     Console.WriteLine("Press 1 to ViewDoctor Details");
                     Console.WriteLine("Press 2 to Add Patient Details");
                     Console.WriteLine("Press 3 to Schedule Appointment");
@@ -78,6 +105,7 @@ namespace ClinicManagement
                             ViewDoctorsInformation();
                             break;
                         case 2:
+                            AddPatientDetails();
                             break;
                         case 3:
                             break;

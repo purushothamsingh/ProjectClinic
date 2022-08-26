@@ -50,6 +50,20 @@ namespace DataFetcher
             return dr;
         }
 
+        public int InsertPatientData(string fname ,string lname ,string gender,int age,DateTime dt)
+        {
+            connect = GetConnection();
+            string query = "insert into patientInfo  values (@fname ,@lname,@gender,@age,@dt)";
+            cmd = new SqlCommand(query, connect);
+            cmd.Parameters.AddWithValue("@fname", fname);
+            cmd.Parameters.AddWithValue("@lname", lname);
+            cmd.Parameters.AddWithValue("@gender", gender);
+            cmd.Parameters.AddWithValue("@age", age);
+            cmd.Parameters.AddWithValue("@dt", dt);
+            int  i = cmd.ExecuteNonQuery();
+            return i;
+        }
+
 
     }
 

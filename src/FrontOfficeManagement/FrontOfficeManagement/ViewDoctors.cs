@@ -15,10 +15,7 @@ namespace FrontOfficeManagement
         public static SqlDataReader drr;
         public SqlDataReader ShowDoctorAvailability()
         {
-
           drr =   adoData.ViewDoctorsData();
-
-
           return drr;
         }
 
