@@ -1,0 +1,15 @@
+C:\Users\Reliance Digital\Desktop\Project-1\ProjectClinic\src\FrontOfficeManagement\FrontOfficeManagement\bin\Debug\net6.0\FrontOfficeManagement.deps.json
+C:\Users\Reliance Digital\Desktop\Project-1\ProjectClinic\src\FrontOfficeManagement\FrontOfficeManagement\bin\Debug\net6.0\FrontOfficeManagement.dll
+C:\Users\Reliance Digital\Desktop\Project-1\ProjectClinic\src\FrontOfficeManagement\FrontOfficeManagement\bin\Debug\net6.0\FrontOfficeManagement.pdb
+C:\Users\Reliance Digital\Desktop\Project-1\ProjectClinic\src\FrontOfficeManagement\FrontOfficeManagement\obj\Debug\net6.0\FrontOfficeManagement.csproj.AssemblyReference.cache
+C:\Users\Reliance Digital\Desktop\Project-1\ProjectClinic\src\FrontOfficeManagement\FrontOfficeManagement\obj\Debug\net6.0\FrontOfficeManagement.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Reliance Digital\Desktop\Project-1\ProjectClinic\src\FrontOfficeManagement\FrontOfficeManagement\obj\Debug\net6.0\FrontOfficeManagement.AssemblyInfoInputs.cache
+C:\Users\Reliance Digital\Desktop\Project-1\ProjectClinic\src\FrontOfficeManagement\FrontOfficeManagement\obj\Debug\net6.0\FrontOfficeManagement.AssemblyInfo.cs
+C:\Users\Reliance Digital\Desktop\Project-1\ProjectClinic\src\FrontOfficeManagement\FrontOfficeManagement\obj\Debug\net6.0\FrontOfficeManagement.csproj.CoreCompileInputs.cache
+C:\Users\Reliance Digital\Desktop\Project-1\ProjectClinic\src\FrontOfficeManagement\FrontOfficeManagement\obj\Debug\net6.0\FrontOfficeManagement.dll
+C:\Users\Reliance Digital\Desktop\Project-1\ProjectClinic\src\FrontOfficeManagement\FrontOfficeManagement\obj\Debug\net6.0\refint\FrontOfficeManagement.dll
+C:\Users\Reliance Digital\Desktop\Project-1\ProjectClinic\src\FrontOfficeManagement\FrontOfficeManagement\obj\Debug\net6.0\FrontOfficeManagement.pdb
+C:\Users\Reliance Digital\Desktop\Project-1\ProjectClinic\src\FrontOfficeManagement\FrontOfficeManagement\obj\Debug\net6.0\ref\FrontOfficeManagement.dll
+C:\Users\Reliance Digital\Desktop\Project-1\ProjectClinic\src\FrontOfficeManagement\FrontOfficeManagement\bin\Debug\net6.0\DataFetcher.dll
+C:\Users\Reliance Digital\Desktop\Project-1\ProjectClinic\src\FrontOfficeManagement\FrontOfficeManagement\bin\Debug\net6.0\DataFetcher.pdb
+C:\Users\Reliance Digital\Desktop\Project-1\ProjectClinic\src\FrontOfficeManagement\FrontOfficeManagement\obj\Debug\net6.0\FrontOfficeManagement.csproj.CopyComplete

@@ -22,3 +22,5 @@ C:\Users\Reliance Digital\Desktop\Project-1\ProjectClinic\src\ClinicManagement\C
 C:\Users\Reliance Digital\Desktop\Project-1\ProjectClinic\src\ClinicManagement\ClinicManagement\obj\Debug\net6.0\ClinicManagement.csproj.CopyComplete
 C:\Users\Reliance Digital\Desktop\Project-1\ProjectClinic\src\ClinicManagement\ClinicManagement\bin\Debug\net6.0\DataFetcher.dll
 C:\Users\Reliance Digital\Desktop\Project-1\ProjectClinic\src\ClinicManagement\ClinicManagement\bin\Debug\net6.0\DataFetcher.pdb
+C:\Users\Reliance Digital\Desktop\Project-1\ProjectClinic\src\ClinicManagement\ClinicManagement\bin\Debug\net6.0\FrontOfficeManagement.dll
+C:\Users\Reliance Digital\Desktop\Project-1\ProjectClinic\src\ClinicManagement\ClinicManagement\bin\Debug\net6.0\FrontOfficeManagement.pdb

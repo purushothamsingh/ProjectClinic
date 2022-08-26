@@ -8,12 +8,20 @@ using System.Data.SqlClient;
 namespace DataFetcher
 {
       public class ConnectionErrorExceptionHandler : Exception
-        {
+    {
 
-            //public ConnectionErrorExceptionHandler(string name)
-            //{
-            //return "invalid connection";
-            //}
+        //public ConnectionErrorExceptionHandler(string name)
+        //{
+        //return "invalid connection";
+        //}
+    }
+    public class InvalidFormatException : Exception { 
+
+        public InvalidFormatException() { }
+        public InvalidFormatException(string message) : base(message) {
+            //return message;
         }
-    
+    }
+
+
 }

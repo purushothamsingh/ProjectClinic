@@ -22,6 +22,23 @@ namespace DataFetcher
             SqlDataReader dr = cmd.ExecuteReader();
             return dr;
         }
+        public  bool UserLoginCheck(string username ,string passw)
+        {
+            connect = GetConnection();
+            string query = "select * from USERMANAGEMENT where USERNAME = @username AND USER_PASSWORD = @passw ";
+            cmd = new SqlCommand(query, connect);
+            cmd.Parameters.AddWithValue("@username", username);
+            cmd.Parameters.AddWithValue("@passw",passw);
+            SqlDataReader dr = cmd.ExecuteReader();
+            if (dr.HasRows)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
 
 

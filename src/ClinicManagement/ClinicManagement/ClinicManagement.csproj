@@ -15,6 +15,9 @@
     <Reference Include="DataFetcher">
       <HintPath>..\..\DataFetcher\DataFetcher\bin\Debug\net6.0\DataFetcher.dll</HintPath>
     </Reference>
+    <Reference Include="FrontOfficeManagement">
+      <HintPath>..\..\FrontOfficeManagement\FrontOfficeManagement\bin\Debug\net6.0\FrontOfficeManagement.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

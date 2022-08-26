@@ -1,25 +1,51 @@
 ﻿using System;
 using DataFetcher;
 using System.Data.SqlClient;
+using FrontOfficeManagement;
 namespace ClinicManagement
 {
     internal class Program
     {
         public static AdoDataBase adoData = new AdoDataBase();
         public static SqlDataReader drr;
+        public static Login login;
         public static void Main()
         {
-            Console.WriteLine("helo");
-         drr =  adoData.getUserDetails();
 
-            while (drr.Read())
+             static bool  LoginCheck()
             {
-                Console.WriteLine("FirstColumn\tSecond Column\t\tThird Column\t\tForth Column\t");
-                    Console.WriteLine(String.Format("{0} \t | {1} \t | {2} \t | {3}",
-                    drr[0], drr[1], drr[2], drr[3]));
-                
+                Console.WriteLine("Welcome to Clinic Management");
+                Console.WriteLine();
+                Console.WriteLine();
+                string username = Console.ReadLine();
+                string password = Console.ReadLine();
+                login = new Login(username, password);
+                if (login.ValidateCredentials())
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            bool status = true;
+            while (status)
+            {
+                bool result = LoginCheck();
+                if (result)
+                {
+                    Console.WriteLine("Login Sucessful");
+                    status = false;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid user name or password");
+                }
 
             }
+
         }
     }
     
