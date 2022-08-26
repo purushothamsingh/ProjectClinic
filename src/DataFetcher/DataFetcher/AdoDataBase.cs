@@ -86,18 +86,14 @@ namespace DataFetcher
             return listdr;
         }
 
-        public string FindDoctor(int id)
+        public SqlDataReader FindDoctor(int id)
         {
             connect = GetConnection();
-            string query = "select firstname from DoctorDetails where docID =@id ";
+            string query = "select * from DoctorDetails where docID =@id ";
             cmd = new SqlCommand(query, connect);
             cmd.Parameters.AddWithValue("@id", id);
             SqlDataReader dr = cmd.ExecuteReader();
-            while (dr.Read())
-            {
-              return  dr[0].ToString();
-            }
-            return "";
+            return dr;
             
         }
 

@@ -156,8 +156,26 @@ namespace ClinicManagement
                     FindAvailability();
                     Console.WriteLine("Enter doctor id to Select Specific doctor");
                     docID = Convert.ToInt32(Console.ReadLine());
-                    docName = adoData.FindDoctor(docID);
+                    dr2 = adoData.FindDoctor(docID);
+                    string time1, time2;
+                    while (dr2.Read())
+                    {
+                        docName = dr2[1].ToString();
+
+                        time1 = dr2[5].ToString();
+                        time2 = dr2[6].ToString();
+                        for (int i = Convert.ToInt32(time1.Substring(0,2)); i < Convert.ToInt32(time2.Substring(0, 2)); i++)
+                        {
+                            Console.WriteLine("slots available are {0}:00",i);
+                        }
+                        Console.WriteLine(time1);
+                        Console.WriteLine(time2);
+                    }
+
                     Console.WriteLine(docName);
+                    
+
+
                 }
                 else
                 {
