@@ -8,6 +8,7 @@ namespace DataFetcher
     {
         public static SqlConnection connect;
         public static SqlCommand cmd;
+        public static List<SqlDataReader> listdr =  new List<SqlDataReader>();
 
         private static SqlConnection GetConnection()
         {
@@ -64,6 +65,41 @@ namespace DataFetcher
             return i;
         }
 
+        public bool CheckPatientID(int id)
+        {
+            connect = GetConnection();
+            string query = "select * from  patientInfo where patientID = @id ";
+            cmd = new SqlCommand(query, connect);
+            cmd.Parameters.AddWithValue("@id", id);
+            SqlDataReader dr = cmd.ExecuteReader();
+            return dr.HasRows ?  true :  false;
+        }
+
+        public List<SqlDataReader> FindSpecialization(string name)
+        {
+            connect = GetConnection();
+            string query = " select * from DoctorDetails where specialization = @name ";
+            cmd = new SqlCommand(query, connect);
+            cmd.Parameters.AddWithValue("@name", name);
+            SqlDataReader dr = cmd.ExecuteReader();
+            listdr.Add(dr);
+            return listdr;
+        }
+
+        public string FindDoctor(int id)
+        {
+            connect = GetConnection();
+            string query = "select firstname from DoctorDetails where docID =@id ";
+            cmd = new SqlCommand(query, connect);
+            cmd.Parameters.AddWithValue("@id", id);
+            SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+              return  dr[0].ToString();
+            }
+            return "";
+            
+        }
 
     }
 

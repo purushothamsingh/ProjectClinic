@@ -2,6 +2,8 @@
 using DataFetcher;
 using System.Data.SqlClient;
 using FrontOfficeManagement;
+using System.Linq;
+using System.Collections.Generic;
 namespace ClinicManagement
 {
     internal class Program
@@ -11,6 +13,9 @@ namespace ClinicManagement
         public static Login login;
         public static ViewDoctors viewDoctors = new ViewDoctors();
         public static AddPatient addPatient = new AddPatient();
+        public static List<SqlDataReader> listdr1 = new List<SqlDataReader>();
+       static string docName;
+       static int docID;
         public static void Main()
         {
             
@@ -36,10 +41,12 @@ namespace ClinicManagement
             static void ViewDoctorsInformation()
             {
                 dr2 = viewDoctors.ShowDoctorAvailability();
+                Console.WriteLine();
                 while (dr2.Read())
                 {
                     Console.WriteLine(dr2[0] + " "+ dr2[1] +" "+ dr2[2]+" " +dr2[3] + " " + dr2[4] + " " + dr2[5]+" " + dr2[6]);
                 }
+                Console.WriteLine();
             }
             static void AddPatientDetails()
             {
@@ -67,7 +74,110 @@ namespace ClinicManagement
                 
 
             }
+            static void AppointmentCreation()
+            {
+                bool is_sucess = true;
+                int pid;
+                string sname;
+               
+                Console.WriteLine("Welcome to AppointmentCreation ");
+                while (is_sucess)
+                {
+                    Console.Write("Enter Patient ID");
+                     pid = Convert.ToInt32(Console.ReadLine());
+                    bool check = adoData.CheckPatientID(pid);
+                   
+                    if (check)
+                    {
+                        is_sucess = false;
+                        Console.WriteLine("Select the Specialization Required below");
+                        Console.WriteLine();
+                         Console.WriteLine("Press 1 For Genereal\n Press 2 For Internal Medicine" +
+                             "\n Press 3 For Pediatrics\n Press 4 For Orthopedics\n Press 5 For Opthalmology ");
+                        int choice = Convert.ToInt32(Console.ReadLine());
+                        switch (choice)
+                        {
+                            case 1:
+                                sname = "General Medicine";
+                                listdr1 =   adoData.FindSpecialization(sname);
+                                Console.WriteLine();
+                                CheckDoctorAvailability();
+                                Console.WriteLine();
+                                break;
+                            case 2:
+                                 sname = "Internal Medicine";
+                                listdr1 = adoData.FindSpecialization(sname);
+                                CheckDoctorAvailability();
+                                Console.WriteLine();
+                                break;
+                            case 3:
+                                 sname = "Pediatrics";
+                                listdr1 = adoData.FindSpecialization(sname);
+                                CheckDoctorAvailability();
+                                Console.WriteLine();
+                                break;
+                            case 4:
+                                sname = "Orthopedics";
+                                listdr1 = adoData.FindSpecialization(sname);
+                                CheckDoctorAvailability();
+                                Console.WriteLine();
+                                break;
+                            case 5:
+                                sname = "Opthalmology";
+                                listdr1 = adoData.FindSpecialization(sname);
+                                CheckDoctorAvailability();
+                                Console.WriteLine();
+                               
+                                break;
+                            default:
+                                Console.WriteLine("Please Select From List Of Doctors");
+                                break;
+                        }
 
+
+                    }
+                    else
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine("Invalid Patient ID Please try Again..");
+                        Console.WriteLine();
+                    }
+                }
+
+
+
+            }
+            static void CheckDoctorAvailability()
+            {
+               
+
+                if (listdr1[0].HasRows)
+                {
+                    FindAvailability();
+                    Console.WriteLine("Enter doctor id to Select Specific doctor");
+                    docID = Convert.ToInt32(Console.ReadLine());
+                    docName = adoData.FindDoctor(docID);
+                    Console.WriteLine(docName);
+                }
+                else
+                {
+                    Console.WriteLine("Currently We dont have any doctors");
+                    listdr1.Clear();
+                }
+            }
+            static void FindAvailability()
+            {
+                Console.WriteLine("Please Find Available list of doctors ");
+                Console.WriteLine();
+                foreach (var dr2 in listdr1)
+                {
+                    while (dr2.Read())
+                    {
+                        Console.WriteLine(dr2[0] + " " + dr2[1] + " " + dr2[2] + " " + dr2[3] + " " + dr2[4] + " " + dr2[5] + " " + dr2[6]);
+                    }
+                }
+                listdr1.Clear();
+            }
             bool status = true;
             bool is_sucessful = false;
 
@@ -108,6 +218,7 @@ namespace ClinicManagement
                             AddPatientDetails();
                             break;
                         case 3:
+                            AppointmentCreation();
                             break;
                         case 4:
                             break;
