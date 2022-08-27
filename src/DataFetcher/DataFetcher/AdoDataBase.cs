@@ -4,11 +4,12 @@ using System.Data.SqlClient;
 
 namespace DataFetcher
 {
-    public class AdoDataBase
+    public class AdoDataBase 
     {
         public static SqlConnection connect;
         public static SqlCommand cmd;
         public static List<SqlDataReader> listdr =  new List<SqlDataReader>();
+        public static List<int> timelist = new List<int>();
 
         private static SqlConnection GetConnection()
         {
@@ -96,6 +97,37 @@ namespace DataFetcher
             return dr;
             
         }
+
+        public List<int> DoctorsTimeAvailability(int docId,string date)
+        {
+            connect = GetConnection();
+            string query = "select * from ScheduleAppointment where doctorID = @docId and appointmentdate = @date";
+            cmd = new SqlCommand(query, connect);
+            cmd.Parameters.AddWithValue("@docId", docId);
+            cmd.Parameters.AddWithValue("@date", date);
+            SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+               timelist.Add(Convert.ToInt32(dr[5].ToString().Substring(0, 2)));
+               
+            }
+            return timelist;
+        }
+        public int InsertAppointment(int patientID, int doctorID, string doctorName, string phoneNumber, DateTime appointmentDate, string appointmentTime)
+        {
+            connect = GetConnection();
+            string query = "insert into ScheduleAppointment  values (@patientID ,@doctorID,@doctorName,@phoneNumber,@appointmentDate,@appointmentTime)";
+            cmd = new SqlCommand(query, connect);
+            cmd.Parameters.AddWithValue("@patientID", patientID);
+            cmd.Parameters.AddWithValue("@doctorID", doctorID);
+            cmd.Parameters.AddWithValue("@doctorName", doctorName);
+            cmd.Parameters.AddWithValue("@phoneNumber", phoneNumber);
+            cmd.Parameters.AddWithValue("@appointmentDate", appointmentDate);
+            cmd.Parameters.AddWithValue("@appointmentTime", appointmentTime);
+            int i = cmd.ExecuteNonQuery();
+            return i;
+        }
+
 
     }
 

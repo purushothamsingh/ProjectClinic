@@ -9,13 +9,15 @@ namespace ClinicManagement
     internal class Program
     {
         public static AdoDataBase adoData = new AdoDataBase();
-        public static SqlDataReader dr2;
-        public static Login login;
         public static ViewDoctors viewDoctors = new ViewDoctors();
         public static AddPatient addPatient = new AddPatient();
+        public static ScheduleAppointment ScheduleAppointment = new ScheduleAppointment();
         public static List<SqlDataReader> listdr1 = new List<SqlDataReader>();
-       static string docName;
-       static int docID;
+        public static List<int> timelist = new List<int>();
+        public static SqlDataReader dr2;
+        public static Login login;
+        static string docName ,date,slot,number;
+        static int docID,pid;
         public static void Main()
         {
             
@@ -77,13 +79,12 @@ namespace ClinicManagement
             static void AppointmentCreation()
             {
                 bool is_sucess = true;
-                int pid;
                 string sname;
                
                 Console.WriteLine("Welcome to AppointmentCreation ");
                 while (is_sucess)
                 {
-                    Console.Write("Enter Patient ID");
+                    Console.Write("Enter Patient ID ");
                      pid = Convert.ToInt32(Console.ReadLine());
                     bool check = adoData.CheckPatientID(pid);
                    
@@ -92,8 +93,8 @@ namespace ClinicManagement
                         is_sucess = false;
                         Console.WriteLine("Select the Specialization Required below");
                         Console.WriteLine();
-                         Console.WriteLine("Press 1 For Genereal\n Press 2 For Internal Medicine" +
-                             "\n Press 3 For Pediatrics\n Press 4 For Orthopedics\n Press 5 For Opthalmology ");
+                         Console.WriteLine("Press 1 For Genereal\nPress 2 For Internal Medicine" +
+                             "\nPress 3 For Pediatrics\nPress 4 For Orthopedics\nPress 5 For Opthalmology ");
                         int choice = Convert.ToInt32(Console.ReadLine());
                         switch (choice)
                         {
@@ -133,8 +134,6 @@ namespace ClinicManagement
                                 Console.WriteLine("Please Select From List Of Doctors");
                                 break;
                         }
-
-
                     }
                     else
                     {
@@ -143,38 +142,73 @@ namespace ClinicManagement
                         Console.WriteLine();
                     }
                 }
-
-
-
             }
             static void CheckDoctorAvailability()
             {
-               
-
                 if (listdr1[0].HasRows)
                 {
                     FindAvailability();
                     Console.WriteLine("Enter doctor id to Select Specific doctor");
                     docID = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Please enter date for doctor appointment YYY/MM/DD format");
+                    date = Console.ReadLine();
+                    timelist = adoData.DoctorsTimeAvailability(docID, date);
                     dr2 = adoData.FindDoctor(docID);
                     string time1, time2;
+                    int empty = 0;
                     while (dr2.Read())
                     {
                         docName = dr2[1].ToString();
-
                         time1 = dr2[5].ToString();
                         time2 = dr2[6].ToString();
-                        for (int i = Convert.ToInt32(time1.Substring(0,2)); i < Convert.ToInt32(time2.Substring(0, 2)); i++)
+                        for (int i = Convert.ToInt32(time1.Substring(0, 2)); i < Convert.ToInt32(time2.Substring(0, 2)); i++)
                         {
-                            Console.WriteLine("slots available are {0}:00",i);
+                            if (timelist.Contains(i))
+                            {
+                                continue;
+                            }
+                            else
+                            {
+                                Console.WriteLine("slots available are {0}:00", i);
+                                empty += 1;
+                            }
+                           
+                            
+
                         }
-                        Console.WriteLine(time1);
-                        Console.WriteLine(time2);
+                        timelist.Clear();
+                        if (empty == 0)
+                        {
+                            Console.WriteLine("All Slots are booked for this date");
+                            
+                        }
+                       
+                        else
+                        {
+                            Console.WriteLine();
+                            Console.Write("Please select the slot specified above ");
+                            slot = Console.ReadLine();
+                            Console.WriteLine();
+                            Console.WriteLine("Enter your Phone Number to Confirm Your solt ");
+                            number = Console.ReadLine();
+                            ScheduleAppointment = new ScheduleAppointment(pid, docID, docName, number, Convert.ToDateTime(date), slot + ":00");
+                            int row = ScheduleAppointment.BookAppointment();
+
+                            if (row > 0)
+                            {
+                                Console.WriteLine("Your solt is booked sucessfully ..");
+                            }
+                            else
+                            {
+                                Console.WriteLine("slot is not booked error in database");
+                            }
+
+
+                        }
+
+
+
                     }
-
-                    Console.WriteLine(docName);
-                    
-
 
                 }
                 else
