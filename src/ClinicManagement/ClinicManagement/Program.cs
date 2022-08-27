@@ -230,6 +230,64 @@ namespace ClinicManagement
                 }
                 listdr1.Clear();
             }
+            static void CancelAppoinment()
+            {
+                bool status = true;
+                bool is_sucessful = false;
+                Console.WriteLine();
+                while (status)
+                {
+                    Console.WriteLine("Welcome to Cancellation Of Your Appointment");
+                    Console.WriteLine();
+                    Console.Write("Enter Patient ID ");
+                    int id = Convert.ToInt32(Console.ReadLine());
+                    bool check = adoData.CheckPatientID(id);
+                    if (check)
+                    {
+                        status = false;
+                        is_sucessful = true;
+                    }
+
+                    if (is_sucessful)
+                    {
+                        dr2 = adoData.ListOfAppointments(id);
+                        Console.WriteLine();
+                        while (dr2.Read())
+                        {
+                            Console.WriteLine(dr2[0] + " " + dr2[1] + " " + dr2[2] + " " + dr2[3] + " " + dr2[4] + " " + dr2[5] );
+                        }
+                        Console.WriteLine();
+                        Console.Write("Enter date to cancle your appointment in YYYY/MM/DD ");
+                        string dt = Console.ReadLine();
+                        dr2 = adoData.ListOfAppointments(id, dt);
+                        Console.WriteLine();
+                        while (dr2.Read())
+                        {
+                            Console.WriteLine(dr2[0] + " " + dr2[1] + " " + dr2[2] + " " + dr2[3] + " " + dr2[4] + " " + dr2[5]);
+                        }
+                        Console.WriteLine();
+                        Console.WriteLine("Enter time to cancle the appointemnt HH:00");
+                        string hour = Console.ReadLine() + ":00";
+
+                        int rows = adoData.CancleAppointment(id, Convert.ToDateTime(dt), hour);
+                        if (rows > 0)
+                        {
+                            Console.WriteLine("Your Appointment Canclled Sucessfully");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Error in data base Appointment cancellation failed");
+                        }
+                    }
+
+                }
+              
+
+
+              
+
+
+            }
             bool status = true;
             bool is_sucessful = false;
 
@@ -273,6 +331,7 @@ namespace ClinicManagement
                             AppointmentCreation();
                             break;
                         case 4:
+                            CancelAppoinment();
                             break;
                         case 5:
                             is_sucessful = false;

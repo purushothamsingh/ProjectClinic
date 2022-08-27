@@ -127,7 +127,39 @@ namespace DataFetcher
             int i = cmd.ExecuteNonQuery();
             return i;
         }
-
+// Section 5 Cancle Appointment part
+        public int CancleAppointment(int id, DateTime date,string time)
+        {
+            connect = GetConnection();
+            string query = "delete from ScheduleAppointment where patientid =@id and appointmentdate = @date and appointmenttime =@time ";
+            cmd = new SqlCommand(query, connect);
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.Parameters.AddWithValue("@date", date);
+            cmd.Parameters.AddWithValue("@time", time);
+            int rowsaffected = cmd.ExecuteNonQuery();
+            return rowsaffected;
+        }
+        public SqlDataReader ListOfAppointments(int pid, string date = "" )
+        {
+            connect = GetConnection();
+            string str = "";
+            if (date == "")
+            {
+                str = "or";
+            }
+            else
+            { 
+                str = "and";
+            }
+            string query = string.Format("select * from ScheduleAppointment where patientid='{0} ' "+ str +" appointmentdate = '{1}' ;", pid,  date);
+            cmd = new SqlCommand(query, connect);
+            cmd.Parameters.AddWithValue("@pid", pid);
+            cmd.Parameters.AddWithValue("@appointmentdate", date);
+           
+            
+            SqlDataReader dr = cmd.ExecuteReader();
+            return dr;
+        }
 
     }
 
