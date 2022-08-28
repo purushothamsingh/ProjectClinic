@@ -13,7 +13,7 @@ namespace ClinicManagement
         public static AddPatient addPatient = new AddPatient();
         public static ScheduleAppointment ScheduleAppointment = new ScheduleAppointment();
         public static List<SqlDataReader> listdr1 = new List<SqlDataReader>();
-        public static Validation validation;
+        public static Validations validation;
         public static List<int> timelist = new List<int>();
         public static SqlDataReader dr2;
         public static Login login;
@@ -36,13 +36,15 @@ namespace ClinicManagement
                 Console.WriteLine();
                 Console.Write("Enter Password is ");
                 string password = Console.ReadLine();
-                bool check = Validation.ValidatePassword(password);
+                bool check = Validations.ValidatePassword(password);
                 while (check==false)
                 {
+                    Console.WriteLine();
                     Console.WriteLine("Your password doest not contain @ symbol");
+                    Console.WriteLine();
                     Console.Write("Enter Password ");
                     password = Console.ReadLine();
-                    check = Validation.ValidatePassword(password);
+                    check = Validations.ValidatePassword(password);
                 }
 
 
@@ -72,12 +74,64 @@ namespace ClinicManagement
                 Console.WriteLine();
                 Console.Write("Enter FirstName ");
                 string fname = Console.ReadLine();
+                bool check = Validations.ValidateString(fname);
+                while(check == false)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Invalid format please give only alphabets");
+                    Console.WriteLine();
+                    Console.Write("Enter FirstName ");
+                     fname = Console.ReadLine();
+                    check = Validations.ValidateString(fname);
+                }
                 Console.Write("Enter LastName  ");
                 string lname = Console.ReadLine();
+                bool check1 = Validations.ValidateString(lname);
+                while (check1 == false)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Invalid format please give only alphabets");
+                    Console.WriteLine();
+                    Console.Write("Enter LastName ");
+                    lname = Console.ReadLine();
+                    check1 = Validations.ValidateString(fname);
+                }
                 Console.Write("Enter Gender  ");
                 string gender = Console.ReadLine();
-                Console.WriteLine("Enter DateofBirth in DD/MM/YYY Format");
-                DateTime dt = Convert.ToDateTime(Console.ReadLine());
+                bool check2 = Validations.ValidateString(gender);
+                while (check2 == false)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Invalid format please give only alphabets");
+                    Console.WriteLine();
+                    Console.Write("Enter Gender  ");
+                    gender = Console.ReadLine();
+                    check2 = Validations.ValidateString(fname);
+                }
+                Console.Write("Enter DateofBirth in DD/MM/YYY Format ");
+                string dt1 = Console.ReadLine();
+                bool check4 = Validations.ValidateDate1(dt1);
+                while (check4 == false)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Invalid Format or it doest accepts strings ");
+                    Console.WriteLine();
+                    Console.Write("Enter DateofBirth in DD/MM/YYY Format ");
+                    dt1 = Console.ReadLine();
+                    check4 = Validations.ValidateDate1(dt1);
+                }
+                DateTime dt = Convert.ToDateTime(dt1);
+                bool check3 = Validations.ValidateDate(dt);
+
+                while (check3 == false)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Invalid format or you entered past date");
+                    Console.WriteLine();
+                    Console.Write("Enter DateofBirth in DD/MM/YYY Format  ");
+                     dt = Convert.ToDateTime(Console.ReadLine());
+                     check3 = Validations.ValidateDate(dt);
+                }
 
                 addPatient = new AddPatient(fname, lname, gender, dt);
                int data = addPatient.Insertdata();
