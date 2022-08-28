@@ -15,6 +15,8 @@ namespace ClinicManagement
         public static List<SqlDataReader> listdr1 = new List<SqlDataReader>();
         public static Validations validation;
         public static List<int> timelist = new List<int>();
+        public static List<int> docIdList = new List<int>();
+        public static List<int> slotsList = new List<int>();
         public static SqlDataReader dr2;
         public static Login login;
         static string docName ,date,slot,number;
@@ -220,6 +222,17 @@ namespace ClinicManagement
                     FindAvailability();
                     Console.WriteLine("Enter doctor id to Select Specific doctor");
                     docID = Convert.ToInt32(Console.ReadLine());
+                    bool check = docIdList.Contains(docID);
+                    while (check==false)
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine("Please Enter Corret doctor id from above");
+                        Console.WriteLine();
+                        docID = Convert.ToInt32(Console.ReadLine());
+                        check = docIdList.Contains(docID);
+
+                    }
+                    docIdList.Clear();
                     Console.WriteLine("Please enter date for doctor appointment YYY/MM/DD format");
                     date = Console.ReadLine();
                     timelist = adoData.DoctorsTimeAvailability(docID, date);
@@ -238,8 +251,9 @@ namespace ClinicManagement
                                 continue;
                             }
                             else
-                            {
+                            { 
                                 Console.WriteLine("slots available are {0}:00", i);
+                                slotsList.Add(i);
                                 empty += 1;
                             }
                            
@@ -256,8 +270,19 @@ namespace ClinicManagement
                         else
                         {
                             Console.WriteLine();
-                            Console.Write("Please select the slot specified above ");
+                            Console.Write("Please Enter the slot specified above ");
                             slot = Console.ReadLine();
+                            bool check4 = slotsList.Contains(Convert.ToInt32(slot.Substring(0,1)));
+                            while(check4 == false)
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine("Please select correct slot from above only");
+                                Console.WriteLine();
+                                Console.Write("Please Enter the slot specified above ");
+                                slot = Console.ReadLine();
+                                check4 = slotsList.Contains(Convert.ToInt32(slot.Substring(0, 1)));
+                            }
+                            slotsList.Clear();
                             Console.WriteLine();
                             Console.WriteLine("Enter your Phone Number to Confirm Your solt ");
                             number = Console.ReadLine();
@@ -295,6 +320,7 @@ namespace ClinicManagement
                 {
                     while (dr2.Read())
                     {
+                        docIdList.Add(Convert.ToInt32(Convert.ToString(dr2[0])));
                         Console.WriteLine(dr2[0] + " " + dr2[1] + " " + dr2[2] + " " + dr2[3] + " " + dr2[4] + " " + dr2[5] + " " + dr2[6]);
                     }
                 }
