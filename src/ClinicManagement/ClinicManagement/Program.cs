@@ -6,13 +6,14 @@ using System.Linq;
 using System.Collections.Generic;
 namespace ClinicManagement
 {
-    internal class Program
+    public class Program
     {
         public static AdoDataBase adoData = new AdoDataBase();
         public static ViewDoctors viewDoctors = new ViewDoctors();
         public static AddPatient addPatient = new AddPatient();
         public static ScheduleAppointment ScheduleAppointment = new ScheduleAppointment();
         public static List<SqlDataReader> listdr1 = new List<SqlDataReader>();
+        public static Validation validation;
         public static List<int> timelist = new List<int>();
         public static SqlDataReader dr2;
         public static Login login;
@@ -27,9 +28,24 @@ namespace ClinicManagement
                 Console.WriteLine();
                 Console.Write("Enter UserName ");
                 string username = Console.ReadLine();
+                if (username.Count() > 10)
+                {
+                    Console.WriteLine("User name should be less than 10 charecters");
+                    LoginCheck();
+                }
                 Console.WriteLine();
-                Console.Write("Enter Password ");
+                Console.Write("Enter Password is ");
                 string password = Console.ReadLine();
+                bool check = Validation.ValidatePassword(password);
+                while (check==false)
+                {
+                    Console.WriteLine("Your password doest not contain @ symbol");
+                    Console.Write("Enter Password ");
+                    password = Console.ReadLine();
+                    check = Validation.ValidatePassword(password);
+                }
+
+
                 login = new Login(username, password);
                 if (login.ValidateCredentials())
                 {
@@ -318,7 +334,11 @@ namespace ClinicManagement
                     Console.WriteLine("Press 4 to Cancle Appointment");
                     Console.WriteLine("Press 5 to Logout");
                     Console.WriteLine("Please Select the option below to proceed");
-                    int userinput = Convert.ToInt32(Console.ReadLine());
+                    int defaultt = 0;
+                    int userinput = 0;
+                    string  userinput1 = Console.ReadLine();
+                    bool handle = int.TryParse(userinput1, out  defaultt);
+                    userinput = handle ? Convert.ToInt32(userinput1) : 0;
                     switch (userinput)
                     {
                         case 1:
@@ -342,6 +362,9 @@ namespace ClinicManagement
                             break;
 
                         default:
+                            Console.WriteLine();
+                            Console.WriteLine("Invalid selection Please Select from above options");
+                            Console.WriteLine();
                             break;
                     }
 
